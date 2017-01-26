@@ -56,6 +56,11 @@
 #   ``Service[jenkins]`` in order for some module functionality (e.g.
 #   ``jenkins::cli``) to work properly
 #
+# @param manage_restart
+#   Enable restart of ``Service[jenkins]`` resource
+#
+#   When setting to ``false``, the restart is a no-op.
+#
 # @param service_enable
 #   Enable (or not) the jenkins service
 #
@@ -299,6 +304,7 @@ class jenkins(
   Stdlib::Absolutepath $package_cache_dir         = $jenkins::params::package_cache_dir,
   Optional[String] $package_provider              = $jenkins::params::package_provider,
   Boolean $manage_service                         = true,
+  Boolean $manage_restart                         = true,
   Boolean $service_enable                         = $jenkins::params::service_enable,
   Enum['running', 'stopped'] $service_ensure      = $jenkins::params::service_ensure,
   Optional[String] $service_provider              = $jenkins::params::service_provider,

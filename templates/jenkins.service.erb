@@ -10,6 +10,8 @@ Group=<%= scope['jenkins::group'] %>
 EnvironmentFile=<%= scope['jenkins::sysconfdir'] %>/jenkins
 ExecStart=<%= scope['jenkins::libdir'] %>/jenkins-run
 Restart=always
+LimitNOFILE=1048576
+LimitNPROC=10240
 
 [Install]
 WantedBy=multi-user.target

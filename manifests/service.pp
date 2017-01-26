@@ -6,12 +6,22 @@ class jenkins::service {
     fail("Use of private class ${name} by ${caller_module_name}")
   }
 
-  service { 'jenkins':
-    ensure     => $jenkins::service_ensure,
-    enable     => $jenkins::service_enable,
-    provider   => $jenkins::service_provider,
-    hasstatus  => true,
-    hasrestart => true,
+  if $::jenkins::manage_restart {
+    service { 'jenkins':
+      ensure     => $jenkins::service_ensure,
+      enable     => $jenkins::service_enable,
+      provider   => $jenkins::service_provider,
+      hasstatus  => true,
+      hasrestart => true,
+    }
+  } else {
+    service { 'jenkins':
+      ensure     => $jenkins::service_ensure,
+      enable     => $jenkins::service_enable,
+      provider   => $jenkins::service_provider,
+      hasstatus  => true,
+      hasrestart => true,
+      restart    => '/usr/bin/true',
+    }
   }
-
 }

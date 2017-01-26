@@ -23,17 +23,17 @@ define jenkins::systemd(
     notify  => Service[$service],
   }
 
-  transition { "stop ${service} service":
-    resource   => Service[$service],
-    attributes => {
-      # lint:ignore:ensure_first_param
-      ensure => stopped,
-      # lint:endignore
-    },
-    prior_to   => [
-      File[$sysv_init],
-    ],
-  }
+# transition { "stop ${service} service":
+#   resource   => Service[$service],
+#   attributes => {
+#     # lint:ignore:ensure_first_param
+#     ensure => stopped,
+#     # lint:endignore
+#   },
+#   prior_to   => [
+#     File[$sysv_init],
+#   ],
+# }
 
   # transition can not set a prior_to on
   # Systemd::Unit_file['jenkins-slave.service'] as it is not a native type so
